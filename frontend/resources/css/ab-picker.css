@@ -1,0 +1,196 @@
+.ab-booking-form .picker__holder {
+    width: 310px!important;
+    overflow: hidden!important;
+   -webkit-border-radius: 5px 5px!important;
+   -moz-border-radius: 5px 5px!important;
+    border-radius: 5px 5px!important;
+    top: 2px;
+    left: 0px;
+    outline: none;
+    bottom: auto;
+}
+
+.ab-booking-form .ab-input-wrap.ab-formField .picker__holder {
+    left: -7px;
+}
+
+.ab-booking-form .picker {
+    width: auto!important;
+    right: auto!important;
+    top: auto!important;
+    bottom: auto!important;
+    left: auto!important;
+}
+
+.ab-booking-form .picker:before,
+.ab-booking-form .picker:after {
+    display: none!important;
+}
+
+.ab-booking-form .picker__frame * {
+    font-size: 14px!important;
+    font-weight: bold!important;
+    border: 0!important;
+}
+
+.ab-booking-form .picker__frame {
+    color: #fff!important;
+    position: static;
+    margin-bottom: 0!important;
+}
+
+.ab-booking-form .picker__weekday {
+    color: #fff!important;
+    font-weight: normal!important;
+    text-align: center!important;
+    padding: 0!important;
+    padding-bottom: .5em!important;
+    border: 0!important;
+    background: none!important;
+}
+
+.ab-booking-form .picker__year {
+    color: #fff!important;
+}
+
+.ab-booking-form .picker__day--selected,
+.ab-booking-form .picker__day--selected:hover,
+.ab-booking-form .picker--focused .picker__day--selected,
+.ab-booking-form .picker__day--infocus:hover,
+.ab-booking-form .picker__day--outfocus:hover {
+    background: #fff!important;
+    border-radius: 4px!important;
+}
+
+.ab-booking-form .picker__day--highlighted {
+    border-color: #fff!important;
+}
+
+.ab-booking-form .picker__button--today:before {
+    display: none!important;
+}
+
+.ab-booking-form .picker__nav--prev:before {
+    border-left: 0!important;
+}
+
+.ab-booking-form .picker__nav--next:before {
+    border-right: 0!important;
+}
+
+.ab-booking-form .picker--focused .picker__day--highlighted {
+    background: none!important;
+    border-radius: 4px!important;
+    color: white!important;
+}
+
+.ab-booking-form .picker--focused .picker__day--highlighted:hover {
+    background: white!important;
+}
+
+.ab-booking-form .picker--focused .picker__day--selected {
+    background: white!important;
+
+}
+
+.ab-booking-form .picker__button--today:hover,
+.ab-booking-form .picker__button--clear:hover {
+    background: white!important;
+    border-bottom-color: white!important;
+}
+
+.ab-booking-form .picker__table {
+    margin-top: .75em!important;
+    margin-bottom: .75em!important;
+    line-height: normal!important;
+    background: none!important;
+}
+
+.ab-booking-form .picker__table td {
+    text-align: center!important;
+    margin: 0!important;
+    padding: 0!important;
+    color: white!important;
+    background: none!important;
+}
+
+.ab-booking-form .picker__table tr,
+.ab-booking-form .picker__table tbody,
+.ab-booking-form .picker__table thead {
+    background: none!important;
+}
+
+.ab-booking-form .picker__nav--prev {
+    left: 0;
+}
+
+.ab-booking-form .picker__nav--next {
+    right: 0;
+}
+
+.ab-booking-form .picker__nav--prev,
+.ab-booking-form .picker__nav--next {
+    background: white!important;
+    border-radius: 50%;
+    padding: 6px;
+    top: -3px;
+}
+
+.ab-booking-form .picker__day--today {
+    border: 1px solid white!important;
+   -webkit-border-radius: 4px!important;
+   -moz-border-radius: 4px!important;
+    border-radius: 4px!important;
+}
+
+.ab-booking-form .picker__day--today:before {
+    display: none;
+}
+
+.ab-booking-form .picker__button--today,
+.ab-booking-form .picker__button--clear {
+    padding: 5px 0!important;
+    width: 33%!important;
+   -webkit-border-radius: 4px!important;
+   -moz-border-radius: 4px!important;
+    border-radius: 4px!important;
+    margin-bottom: 10px!important;
+    float: none!important;
+    background: white!important;
+}
+
+.ab-booking-form .picker__day--disabled {
+    opacity: .5;
+    background: none!important;
+}
+
+.ab-booking-form .picker__day--disabled:hover {
+    background: white;
+}
+
+.ab-booking-form .picker__nav--disabled {
+    display: none;
+}
+
+@media screen and (max-width: 650px) {
+    .ab-booking-form .ab-slot-calendar {
+        width: 100%!important;
+        float: none!important;
+        margin-right: 0!important;
+    }
+    .ab-booking-form .ab-slot-calendar .ab-date-wrap {
+        display: block;
+        width: 100%;
+        position: relative;
+    }
+    .ab-booking-form .ab-slot-calendar .ab-date-wrap .picker {
+        width: 100%!important;
+        right: 0!important;
+        top: 0!important;
+        bottom: 0!important;
+        left: 0!important;
+    }
+    .ab-booking-form .picker__holder {
+        width: 100%!important;
+    }
+}

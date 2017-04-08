@@ -1,0 +1,235 @@
+/* global class */
+
+.ab-right {
+    float: left!important;
+}
+
+.ab-left {
+    float: right!important;
+}
+
+.ab-rtext {
+    text-align: left;
+}
+
+.ab-list {
+    margin-right: 10px!important;
+    margin-left: auto;
+}
+
+.ab-service-step .ab-right {
+    float: left!important;
+}
+
+.ab-slot-calendar {
+    float: right;
+}
+
+.ab-formGroup .ab-formField .ab-formElement.ab-user-phone {
+    padding-left: 0!important;
+}
+
+.ab-booking-form .picker__holder {
+    left: auto!important;
+    right: -7px!important;
+}
+
+.bookly-close:hover,
+.bookly-close:focus,
+.bookly-close {
+    float: left;
+}
+
+.bookly-modal {
+    right: 0;
+    left: auto;
+}
+
+.bookly-modal .bookly-modal-dialog {
+    right: 50%;
+    margin-right: -200px;
+    left: auto;
+    margin-left: auto;
+}
+
+.bookly-modal .bookly-modal-content .bookly-modal-footer {
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+
+    .bookly-modal .bookly-modal-content .bookly-modal-footer {
+        text-align: left;
+    }
+
+}
+
+.ab-progress-bar {
+    margin: 0 0 10px 0!important;
+}
+
+.ab-progress-bar .ab-step-tabs {
+    padding-right: 4px;
+    padding-left: 0;
+}
+
+.ab-progress-bar .ab-step-tabs.ab-first .step {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.ab-progress-bar .ab-step-tabs.ab-last .step {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.ab-progress-bar .ab-step-tabs.ab-first {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.ab-progress-bar .ab-step-tabs .arr {
+    right: 0;
+    border-right: 7px solid #4f92bd;
+    left: auto;
+    border-left: none;
+}
+
+.ab-mobile-step_1 {
+    margin-left: -10px;
+    margin-right: auto;
+}
+
+.ab-service-step .ab-time-from {
+    margin-left: 12px;
+    margin-right: auto;
+}
+
+.ab-service-step .ab-week-days {
+    float: right!important;
+}
+
+.ab-service-step .ab-week-days li {
+    float: right!important;
+    margin: 0 1px 3px 1px!important;
+}
+
+.ab-back-step {
+    margin-left: 10px;
+    margin-right: auto;
+}
+
+.ab-label-error {
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.ab-formGroup.ab-lastGroup .ab-formField {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.ab-formGroup .ab-formField {
+    margin-left: 10px;
+    margin-right: auto;
+}
+
+.ab-formGroup .ab-formField .ab-captcha-img {
+    margin: 0 -8px 10px 0;
+}
+
+.ab-formGroup .ab-formField .ab-formElement.ab-user-phone {
+    padding-right: 44px!important;
+    padding-left: 0;
+}
+
+.ab-formGroup .ab-formField .ab-user-phone.ab-field-error {
+    padding-right: 44px!important;
+    padding-left: 0;
+}
+
+.ab-service-step .ab-left {
+    float: right!important;
+}
+
+.ab-service-step .ab-time-range,
+.ab-service-step .ab-available-date,
+.ab-service-step .ab-available-days {
+    margin-left: 10px!important;
+    margin-right: auto;
+}
+
+.ab-time-next {
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+.intl-tel-input input,.intl-tel-input input[type=text],.intl-tel-input input[type=tel] {
+    padding-right:48px;
+    margin-right:0;
+    padding-left: 0;
+    margin-left: auto;
+}
+
+.intl-tel-input .selected-flag {
+    padding:0 8px 0 0;
+}
+
+.intl-tel-input .selected-flag .arrow {
+    left:4px;
+    border-right:3px solid transparent;
+    border-left:3px solid transparent;
+    right: auto;
+}
+
+.intl-tel-input .country-list {
+    margin:0 -1px 0 0;
+}
+
+@media (max-width: 500px) {
+
+}
+
+.intl-tel-input .country-list .flag,.intl-tel-input .country-list .country-name {
+    margin-left:6px;
+    margin-right: auto;
+}
+
+.intl-tel-input select {
+    right:0;
+    left: auto;
+}
+
+@media screen and (max-width: 650px) {
+
+    .ab-formGroup .ab-formField .ab-user-phone.ab-field-error {
+        padding-right: 44px!important;
+        padding-left: 0;
+    }
+
+    .ab-service-step .ab-left {
+        float: left!important;
+    }
+
+    .ab-service-step .ab-time-from {
+        margin-left: 12px;
+        margin-right: auto;
+    }
+
+    .ab-service-step .ab-time-range,
+    .ab-service-step .ab-available-date,
+    .ab-service-step .ab-available-days {
+        margin-left: 10px!important;
+        margin-right: auto;
+    }
+
+    .ab-time-next {
+        margin-right: auto;
+        margin-left: 10px;
+    }
+
+}
