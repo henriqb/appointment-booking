@@ -495,6 +495,7 @@ class Controller extends Lib\Controller
                         'payment'            => $userData->extractPaymentStatus(),
                         'pay_local'          => get_option( 'ab_settings_pay_locally' ) != 'disabled',
                         'pay_paypal'         => get_option( 'ab_paypal_type' ) != 'disabled',
+                        'pay_pagseguro'      => get_option( 'ab_pagseguro_type') != 'disabled',
                         'pay_stripe'         => get_option( 'ab_stripe' ) != 'disabled',
                         'pay_2checkout'      => get_option( 'ab_2checkout' ) != 'disabled',
                         'pay_authorizenet'   => get_option( 'ab_authorizenet_type' ) != 'disabled',

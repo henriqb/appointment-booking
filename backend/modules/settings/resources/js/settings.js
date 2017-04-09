@@ -95,6 +95,10 @@ jQuery(function ($) {
         $('.ab-paypal-ec').toggle(this.value != 'disabled');
     }).change();
 
+    $('#ab_pagseguro_type').change(function () {
+        $('.ab-pagseguro-ec').toggle(this.value != 'disabled');
+    }).change();
+
     $('#ab_authorizenet_type').change(function () {
         $('.authorizenet').toggle(this.value != 'disabled');
     }).change();

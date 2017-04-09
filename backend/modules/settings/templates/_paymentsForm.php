@@ -87,6 +87,29 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
+            <label for="ab_pagseguro_type">PagSeguro</label>
+            <img style="margin-left: 10px; float: right" src="<?php echo plugins_url( 'frontend/resources/images/pagseguro.png', AB_PATH . '/main.php' ) ?>" />
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <?php \Bookly\Lib\Utils\Common::optionToggle( 'ab_pagseguro_type', array( 'f' => array( 'disabled', __( 'Disabled', 'bookly' ) ), 't' => array( 'ec', 'PagSeguro' ) ) ) ?>
+            </div>
+            <div class="form-group ab-pagseguro-ec">
+                <label for="ab_pagseguro_api_token">Token</label>
+                <input id="ab_pagseguro_api_token" class="form-control" type="text" name="ab_pagseguro_api_token" value="<?php echo get_option( 'ab_pagseguro_api_token' ) ?>"/>
+            </div>
+            <div class="form-group ab-pagseguro-ec">
+                <label for="ab_pagseguro_api_email">E-mail</label>
+                <input id="ab_pagseguro_api_email" class="form-control" type="text" name="ab_pagseguro_api_email" value="<?php echo get_option( 'ab_pagseguro_api_email' ) ?>"/>
+            </div>
+            <div class="form-group ab-pagseguro-ec">
+                <label for="ab_pagseguro_ec_mode"><?php _e( 'Sandbox Mode', 'bookly' ) ?></label>
+                <?php \Bookly\Lib\Utils\Common::optionToggle( 'ab_pagseguro_ec_mode', array( 't' => array( '.sandbox', __( 'Yes', 'bookly' ) ), 'f' => array( '', __( 'No', 'bookly' ) ) ) ) ?>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
             <label for="ab_authorizenet_type">Authorize.Net</label>
             <img style="margin-left: 10px; float: right" src="<?php echo plugins_url( 'frontend/resources/images/authorize_net.png', AB_PATH . '/main.php' ) ?>" />
         </div>

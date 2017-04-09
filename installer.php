@@ -242,6 +242,11 @@ class Installer
             'ab_paypal_api_signature'                => '',
             'ab_paypal_ec_mode'                      => '',  // '.sandbox' or ''
             'ab_paypal_id'                           => '',
+            // PagSeguro
+            'ab_pagseguro_type'                      => 'disabled',
+            'ab_pagseguro_api_token'                 => '',
+            'ab_pagseguro_api_email'                 => '',
+            'ab_pagseguro_ec_mode'                   => '',
             // Authorize.net
             'ab_authorizenet_type'                   => 'disabled',
             'ab_authorizenet_sandbox'                => '0',
@@ -593,7 +598,7 @@ class Installer
             'CREATE TABLE IF NOT EXISTS `' . Lib\Entities\Payment::getTableName() . '` (
                 `id`                      INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 `created`                 DATETIME NOT NULL,
-                `type`                    ENUM("local","coupon","paypal","authorizeNet","stripe","2checkout","payulatam","payson","mollie") NOT NULL DEFAULT "local",
+                `type`                    ENUM("local","coupon","paypal","authorizeNet","stripe","2checkout","payulatam","payson","mollie","pagseguro") NOT NULL DEFAULT "local",
                 `customer_appointment_id` INT UNSIGNED NOT NULL,
                 `token`                   VARCHAR(255) NOT NULL,
                 `transaction_id`          VARCHAR(255) NOT NULL,

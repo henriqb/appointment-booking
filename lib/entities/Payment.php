@@ -18,6 +18,7 @@ class Payment extends Lib\Entity
     const TYPE_PAYULATAM    = 'payulatam';
     const TYPE_PAYSON       = 'payson';
     const TYPE_MOLLIE       = 'mollie';
+    const TYPE_PAGSEGURO    = 'pagseguro';
 
     const STATUS_COMPLETED  = 'completed';
     const STATUS_PENDING    = 'pending';
@@ -53,6 +54,7 @@ class Payment extends Lib\Entity
             case self::TYPE_PAYSON:       return 'Payson';
             case self::TYPE_MOLLIE:       return 'Mollie';
             case self::TYPE_COUPON:       return __( 'Coupon', 'bookly' );
+            case self::TYPE_PAGSEGURO:    return 'PagSeguro';
             default:                      return '';
         }
     }
