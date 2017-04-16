@@ -1240,7 +1240,7 @@
                             $coupon_error = $('.ab-coupon-error', $container),
                             $coupon_info_text = $('.ab-info-text-coupon', $container),
                             $ab_payment_nav = $('.ab-payment-nav', $container),
-                            $buttons = $('.ab-paypal-payment-button,.ab-card-payment-button,form.ab-authorizenet,form.ab-stripe,.ab-local-payment-button,.ab-2checkout-payment-button,.ab-payulatam-payment-button,.ab-payson-payment-button,.ab-mollie-payment-button', $container),
+                            $buttons = $('.ab-paypal-payment-button,.ab-pagseguro-payment-button,.ab-card-payment-button,form.ab-authorizenet,form.ab-stripe,.ab-local-payment-button,.ab-2checkout-payment-button,.ab-payulatam-payment-button,.ab-payson-payment-button,.ab-mollie-payment-button', $container),
                             response_url = document.URL
                         ;
                         $('.ab-2checkout-form > input[name=x_receipt_link_url]', $container).val(response_url);
@@ -1381,11 +1381,32 @@
                                     card_payment(data);
                                 }
                             } else if (    $('.ab-payment[value=paypal]',    $container).is(':checked')
+                                        || $('.ab-payment[value=pagseguro]', $container).is(':checked')
                                         || $('.ab-payment[value=2checkout]', $container).is(':checked')
                                         || $('.ab-payment[value=payulatam]', $container).is(':checked')
                                         || $('.ab-payment[value=payson]',    $container).is(':checked')
                                         || $('.ab-payment[value=mollie]',    $container).is(':checked')
                             ) {
+                                function pagSeguro() {
+                                    $.post('', { action: 'ab-pagseguro-checkout', ab_fid: $('input[name=ab_fid]').val() }).done(function (code) {
+                                        console.log("token-checkout: " + code);
+                                        PagSeguroLightbox(code, {
+                                            success: function(transactionCode) {
+                                                $form.append('<input type="hidden" name="token" value="' + code + '" />');
+                                                $form.append('<input type="hidden" name="transaction" value="'+ transactionCode +'" />');
+                                                $form.find('input[name=action]').val('ab-pagseguro-return');
+                                                console.log("success-code: " + transactionCode);
+                                                $form.submit();
+                                            },
+                                            abort: function() {
+                                                alert('Pagamento Cancelado.');
+                                            }
+                                        });
+                                    }).fail(function (e) {
+                                        alert('error:' + e);
+                                    });
+                                }
+
                                 e.preventDefault();
                                 $form = $(this).closest('form');
                                 if ($form.find('input.ab--pending_appointments').length > 0 ) {
@@ -1399,7 +1420,11 @@
                                         success    : function (response) {
                                             if (response.success) {
                                                 $form.find('input.ab--pending_appointments').val(response.ca_ids);
-                                                $form.submit();
+                                                if ($('.ab-payment[value=pagseguro]', $container).is(':checked')){
+                                                    pagSeguro();
+                                                } else {
+                                                    $form.submit();
+                                                }
                                             } else if (response.error_code == 3) {
                                                 handle_error_3(response);
                                             }
@@ -1415,7 +1440,11 @@
                                         dataType   : 'json',
                                         success    : function (response) {
                                             if (response.success) {
-                                                $form.submit();
+                                               if ($('.ab-payment[value=pagseguro]', $container).is(':checked')){
+                                                    pagSeguro();
+                                                } else {
+                                                    $form.submit();
+                                                }
                                             } else if (response.error_code == 3) {
                                                 handle_error_3(response);
                                             }

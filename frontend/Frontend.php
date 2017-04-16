@@ -17,6 +17,7 @@ class Frontend
         // Init controllers.
         $this->bookingController         = new Modules\Booking\Controller();
         $this->paypalController          = new Modules\Paypal\Controller();
+        $this->pagseguroController       = new Modules\PagSeguro\Controller();
         $this->twocheckoutController     = new Modules\TwoCheckout\Controller();
         $this->payulatamController       = new Modules\PayuLatam\Controller();
         $this->paysonController          = new Modules\Payson\Controller();
@@ -108,6 +109,19 @@ class Frontend
                     break;
                 case 'ab-paypal-error':
                     $this->paypalController->error();
+                    break;
+                // PagSeguro
+                case 'ab-pagseguro-checkout':
+                    $this->pagseguroController->checkout();
+                    break;
+                case 'ab-pagseguro-return':
+                    $this->pagseguroController->success();
+                    break;
+                case 'ab-pagseguro-cancel':
+                    $this->pagseguroController->cancel();
+                    break;
+                case 'ab-pagseguro-error':
+                    $this->pagseguroController->error();
                     break;
                 // 2Checkout.
                 case 'ab-2checkout-approved':

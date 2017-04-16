@@ -45,10 +45,23 @@
         </div>
     <?php endif ?>
 
+    <?php if ( $pay_pagseguro ) : ?>
+        <div class="ab-row-fluid ab-list">
+            <label>
+                <input type="radio" class="ab-payment" <?php checked( !$pay_local && !$pay_paypal ) ?> name="payment-method-<?php echo $form_id ?>" value="pagseguro"/>
+                Pagar com PagSeguro
+                <img src="<?php echo plugins_url( 'frontend/resources/images/pagseguro.png', AB_PATH . '/main.php' ) ?>" style="margin-left: 10px;" alt="pagseguro" />
+            </label>
+            <?php if ( $payment['gateway'] == Bookly\Lib\Entities\Payment::TYPE_PAGSEGURO && $payment['status'] == 'error' ) : ?>
+                <div class="ab-label-error ab-bold" style="padding-top: 5px;">* <?php echo $payment['data'] ?></div>
+            <?php endif ?>
+        </div>
+    <?php endif ?>
+
     <?php if ( $pay_authorizenet ) : ?>
         <div class="ab-row-fluid ab-list">
             <label>
-                <input type="radio" class="ab-payment" <?php checked( !$pay_local && !$pay_paypal ) ?> name="payment-method-<?php echo $form_id ?>" value="card" data-form="authorizenet" />
+                <input type="radio" class="ab-payment" <?php checked( !$pay_local && !$pay_paypal && !$pay_pagseguro ) ?> name="payment-method-<?php echo $form_id ?>" value="card" data-form="authorizenet" />
                 <?php echo \Bookly\Lib\Utils\Common::getTranslatedOption( 'ab_appearance_text_label_pay_ccard' ) ?>
                 <img src="<?php echo plugins_url( 'resources/images/cards.png', dirname( dirname( dirname( __FILE__ ) ) ) ) ?>" style="margin-left: 10px;" alt="cards" />
             </label>
@@ -61,7 +74,7 @@
     <?php if ( $pay_stripe ) : ?>
         <div class="ab-row-fluid ab-list">
             <label>
-                <input type="radio" class="ab-payment" <?php checked( !$pay_local && !$pay_paypal && !$pay_authorizenet ) ?> name="payment-method-<?php echo $form_id ?>" value="card" data-form="stripe" />
+                <input type="radio" class="ab-payment" <?php checked( !$pay_local && !$pay_paypal && !$pay_pagseguro && !$pay_authorizenet ) ?> name="payment-method-<?php echo $form_id ?>" value="card" data-form="stripe" />
                 <?php echo \Bookly\Lib\Utils\Common::getTranslatedOption( 'ab_appearance_text_label_pay_ccard' ) ?>
                 <img src="<?php echo plugins_url( 'resources/images/cards.png', dirname( dirname( dirname( __FILE__ ) ) ) ) ?>" style="margin-left: 10px;" alt="cards" />
             </label>
@@ -78,7 +91,7 @@
     <?php if ( $pay_2checkout ) : ?>
         <div class="ab-row-fluid ab-list">
             <label>
-                <input type="radio" class="ab-payment" <?php checked( !$pay_local && !$pay_paypal && !$pay_authorizenet && !$pay_stripe ) ?> name="payment-method-<?php echo $form_id ?>" value="2checkout"/>
+                <input type="radio" class="ab-payment" <?php checked( !$pay_local && !$pay_paypal && !$pay_pagseguro && !$pay_authorizenet && !$pay_stripe ) ?> name="payment-method-<?php echo $form_id ?>" value="2checkout"/>
                 <?php echo \Bookly\Lib\Utils\Common::getTranslatedOption( 'ab_appearance_text_label_pay_ccard' ) ?>
                 <img src="<?php echo plugins_url( 'resources/images/cards.png', dirname( dirname( dirname( __FILE__ ) ) ) ) ?>" style="margin-left: 10px;" alt="cards" />
             </label>
@@ -88,7 +101,7 @@
     <?php if ( $pay_payulatam ) : ?>
         <div class="ab-row-fluid ab-list">
             <label>
-                <input type="radio" class="ab-payment" <?php checked( !$pay_local && !$pay_paypal && !$pay_authorizenet && !$pay_stripe && !$pay_2checkout ) ?> name="payment-method-<?php echo $form_id ?>" value="payulatam"/>
+                <input type="radio" class="ab-payment" <?php checked( !$pay_local && !$pay_paypal && !$pay_pagseguro && !$pay_authorizenet && !$pay_stripe && !$pay_2checkout ) ?> name="payment-method-<?php echo $form_id ?>" value="payulatam"/>
                 <?php echo \Bookly\Lib\Utils\Common::getTranslatedOption( 'ab_appearance_text_label_pay_ccard' ) ?>
                 <img src="<?php echo plugins_url( 'resources/images/cards.png', dirname( dirname( dirname( __FILE__ ) ) ) ) ?>" style="margin-left: 10px;" alt="cards" />
             </label>
@@ -104,7 +117,7 @@
     <?php if ( $pay_payson ) : ?>
         <div class="ab-row-fluid ab-list">
             <label>
-                <input type="radio" class="ab-payment" <?php checked( !$pay_local && !$pay_paypal && !$pay_authorizenet && !$pay_stripe && !$pay_payulatam ) ?> name="payment-method-<?php echo $form_id ?>" value="payson"/>
+                <input type="radio" class="ab-payment" <?php checked( !$pay_local && !$pay_paypal && !$pay_pagseguro && !$pay_authorizenet && !$pay_stripe && !$pay_payulatam ) ?> name="payment-method-<?php echo $form_id ?>" value="payson"/>
                 <?php echo \Bookly\Lib\Utils\Common::getTranslatedOption( 'ab_appearance_text_label_pay_ccard' ) ?>
                 <img src="<?php echo plugins_url( 'resources/images/cards.png', dirname( dirname( dirname( __FILE__ ) ) ) ) ?>" style="margin-left: 10px;" alt="cards" />
             </label>
@@ -117,7 +130,7 @@
     <?php if ( $pay_mollie ) : ?>
         <div class="ab-row-fluid ab-list">
             <label>
-                <input type="radio" class="ab-payment" <?php checked( !$pay_local && !$pay_paypal && !$pay_authorizenet && !$pay_stripe && !$pay_payulatam && !$pay_payson ) ?> name="payment-method-<?php echo $form_id ?>" value="mollie"/>
+                <input type="radio" class="ab-payment" <?php checked( !$pay_local && !$pay_paypal && !$pay_pagseguro && !$pay_authorizenet && !$pay_stripe && !$pay_payulatam && !$pay_payson ) ?> name="payment-method-<?php echo $form_id ?>" value="mollie"/>
                 <?php echo \Bookly\Lib\Utils\Common::getTranslatedOption( 'ab_appearance_text_label_pay_mollie' ) ?>
                 <img src="<?php echo plugins_url( 'resources/images/mollie.png', dirname( dirname( dirname( __FILE__ ) ) ) ) ?>" style="margin-left: 10px;" alt="mollie" />
             </label>
@@ -145,20 +158,27 @@
     </div>
 <?php endif ?>
 
+<?php if ( $pay_pagseguro ) : ?>
+    <script type="text/javascript" src="https://stc<?php echo get_option( 'ab_pagseguro_ec_mode' ) ?>.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+    <div class="ab-pagseguro-payment-button ab-row-fluid ab-nav-steps" <?php if ( $pay_local || $pay_paypal ) echo 'style="display:none"' ?>>
+        <?php Bookly\Lib\Payment\PagSeguro::renderForm( $form_id ) ?>
+    </div>
+<?php endif ?>
+
 <?php if ( $pay_2checkout ) : ?>
-    <div class="ab-2checkout-payment-button ab-row-fluid ab-nav-steps" <?php if ( $pay_local || $pay_paypal ) echo 'style="display:none"' ?>>
+    <div class="ab-2checkout-payment-button ab-row-fluid ab-nav-steps" <?php if ( $pay_local || $pay_pagseguro || $pay_paypal ) echo 'style="display:none"' ?>>
         <?php Bookly\Lib\Payment\TwoCheckout::renderForm( $form_id ) ?>
     </div>
 <?php endif ?>
 
 <?php if ( $pay_payulatam ) : ?>
-    <div class="ab-payulatam-payment-button ab-row-fluid ab-nav-steps" <?php if ( $pay_local || $pay_paypal || $pay_2checkout ) echo 'style="display:none"' ?>>
+    <div class="ab-payulatam-payment-button ab-row-fluid ab-nav-steps" <?php if ( $pay_local || $pay_pagseguro || $pay_paypal || $pay_2checkout ) echo 'style="display:none"' ?>>
         <?php Bookly\Lib\Payment\PayuLatam::renderForm( $form_id ) ?>
     </div>
 <?php endif ?>
 
 <?php if ( $pay_authorizenet || $pay_stripe ) : ?>
-    <div class="ab-card-payment-button ab-row-fluid ab-nav-steps" <?php if ( $pay_local || $pay_paypal || $pay_2checkout || $pay_payulatam ) echo 'style="display:none"' ?>>
+    <div class="ab-card-payment-button ab-row-fluid ab-nav-steps" <?php if ( $pay_local || $pay_pagseguro || $pay_paypal || $pay_2checkout || $pay_payulatam ) echo 'style="display:none"' ?>>
         <button class="ab-left ab-back-step ab-btn ladda-button" data-style="zoom-in" data-spinner-size="40">
             <span class="ladda-label"><?php echo \Bookly\Lib\Utils\Common::getTranslatedOption( 'ab_appearance_text_button_back' ) ?></span>
         </button>
