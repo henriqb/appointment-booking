@@ -78,7 +78,7 @@ class Controller extends Lib\Controller
         $pagseguro  = new Lib\Payment\PagSeguro();
 
         if ( $this->hasParameter( 'transaction' ) && $this->hasParameter('token') ) {
-            // TODO Validate payment has been token
+            // TODO Validate payment has been made
             $token = $this->getParameter('token'); 
             $transaction = $this->getParameter( 'transaction' );
 
@@ -91,10 +91,8 @@ class Controller extends Lib\Controller
                 ->where( 'p.transaction_id', $transaction )
                 ->findOne();
             if ( empty ( $payment ) ) {
-                echo('Empty' . '<br/>');
                 $userData->foreachCartItem( function ( Lib\UserBookingData $userData, $cart_key ) use ( $cart_info, $transaction, $token ) {
                     $customer_appointment = $userData->save();
-                    echo('Saved customer appointment' . '<br/>');
                     $payment = new Lib\Entities\Payment();
                     $payment->set( 'customer_appointment_id', $customer_appointment->get( 'id' ) );
                     $payment->set( 'transaction_id', $transaction );
@@ -104,12 +102,11 @@ class Controller extends Lib\Controller
                     $payment->set( 'type',    Lib\Entities\Payment::TYPE_PAGSEGURO );
                     $payment->set( 'status',  Lib\Entities\Payment::STATUS_COMPLETED );
                     $payment->save();
-                    echo('Payment saved, total: ' . $total . ' token: ' . $token . ' transaction: ' . $transaction . '<br/>');
                 });
             }
             $userData->setPaymentStatus( Lib\Entities\Payment::TYPE_PAGSEGURO, 'success' );
 
-            //@wp_redirect( remove_query_arg( Lib\Payment\PagSeguro::$remove_parameters, Lib\Utils\Common::getCurrentPageURL() ) );
+            @wp_redirect( remove_query_arg( Lib\Payment\PagSeguro::$remove_parameters, Lib\Utils\Common::getCurrentPageURL() ) );
             exit;
         } else {
             header( 'Location: ' . wp_sanitize_redirect( add_query_arg( array(
