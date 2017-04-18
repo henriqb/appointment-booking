@@ -123,6 +123,9 @@ class Frontend
                 case 'ab-pagseguro-error':
                     $this->pagseguroController->error();
                     break;
+                case 'ab-pagseguro-notification':
+                    $this->pagseguroController->notification();
+                    break;
                 // 2Checkout.
                 case 'ab-2checkout-approved':
                     $this->twocheckoutController->approved();

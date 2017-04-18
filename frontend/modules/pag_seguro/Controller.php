@@ -78,20 +78,29 @@ class Controller extends Lib\Controller
         $pagseguro  = new Lib\Payment\PagSeguro();
 
         if ( $this->hasParameter( 'transaction' ) && $this->hasParameter('token') ) {
-            // TODO Validate payment has been made
             $token = $this->getParameter('token'); 
             $transaction = $this->getParameter( 'transaction' );
 
             $userData = new Lib\UserBookingData( $form_id );
             $userData->load();
             $cart_info = $userData->getCartInfo();
+
+            $response = $pagseguro->seeIfTransactionIsPaid( $transaction );
+
+            $status = '';
+            if ( $response->status == 3 || $response->status == 4 ) {
+                $status = Lib\Entities\Payment::STATUS_COMPLETED;
+            } else {
+                $status = Lib\Entities\Payment::STATUS_PENDING;
+            }
+
             $payment = Lib\Entities\Payment::query( 'p' )
                 ->select( 'p.id' )
                 ->where( 'p.type', Lib\Entities\Payment::TYPE_PAGSEGURO )
                 ->where( 'p.transaction_id', $transaction )
                 ->findOne();
             if ( empty ( $payment ) ) {
-                $userData->foreachCartItem( function ( Lib\UserBookingData $userData, $cart_key ) use ( $cart_info, $transaction, $token ) {
+                $userData->foreachCartItem( function ( Lib\UserBookingData $userData, $cart_key ) use ( $cart_info, $transaction, $token , $status) {
                     $customer_appointment = $userData->save();
                     $payment = new Lib\Entities\Payment();
                     $payment->set( 'customer_appointment_id', $customer_appointment->get( 'id' ) );
@@ -100,7 +109,7 @@ class Controller extends Lib\Controller
                     $payment->set( 'token',   $token );
                     $payment->set( 'created', current_time( 'mysql' ) );
                     $payment->set( 'type',    Lib\Entities\Payment::TYPE_PAGSEGURO );
-                    $payment->set( 'status',  Lib\Entities\Payment::STATUS_COMPLETED );
+                    $payment->set( 'status',  $status );
                     $payment->save();
                 });
             }
@@ -117,5 +126,44 @@ class Controller extends Lib\Controller
                 ) ) );
             exit;
         }
+    }
+
+    function notification() 
+    {
+        header("access-control-allow-origin: *");
+        $pagseguro  = new Lib\Payment\PagSeguro();
+        echo('oi');
+
+        if ( $this->hasParameter( 'notificationCode' ) ) {
+            $notificationCode = $this->getParameter( 'notificationCode' );
+            echo(' | $transaction: ' . $notificationCode);
+
+            $response = $pagseguro->getNotificationData( $notificationCode );
+
+            echo(' | $response: ' . $response);
+
+            $transaction = $response->code;
+            $status = '';
+            if ( $response->status == 3 || $response->status == 4 ) {
+                $status = Lib\Entities\Payment::STATUS_COMPLETED;
+            } else {
+                $status = Lib\Entities\Payment::STATUS_PENDING;
+            }
+            echo(' | $status: ' . $status);
+            echo(' | $transaction: ' . $transaction);
+
+            $payment = Lib\Entities\Payment::query( 'p' )
+                ->select( 'p.*' )
+                ->where( 'p.type', Lib\Entities\Payment::TYPE_PAGSEGURO )
+                ->where( 'p.transaction_id', $transaction )
+                ->findOne();
+
+            $payment->set( 'status',  $status );
+            $payment->save();
+
+            exit(' | Success');
+        } else {
+            exit('ERR:No notificationCode');
+        }        
     }
 }

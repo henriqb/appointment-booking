@@ -69,6 +69,90 @@ class PagSeguro
     }
 
     /**
+     * See if transaction is paid
+     *
+     * @param $transaction
+     * @return array
+     */
+    public function seeIfTransactionIsPaid( $transaction )
+    {
+        $email   = urlencode( get_option( 'ab_pagseguro_api_email' ) );
+        $token   = urlencode( get_option( 'ab_pagseguro_api_token' ) );
+
+        $url = 'https://ws' . get_option( 'ab_pagseguro_ec_mode' ) . '.pagseguro.uol.com.br/v3/transactions/';
+        $url .= $transaction . '?email=' . $email . '&token=' . $token;
+
+        // Set the curl parameters.
+        $ch = curl_init();
+        curl_setopt( $ch, CURLOPT_URL, $url );
+        curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
+
+        // Turn off the server and peer verification (TrustManager Concept).
+        curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
+        curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, false );
+
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+
+        // Get response from the server.
+        $httpResponse = curl_exec( $ch );
+
+        if ( ! $httpResponse ) {
+            exit( ' See if transaction is paid at PagSeguro failed: ' . curl_error( $ch ) . '(' . curl_errno( $ch ) . ')' );
+        }
+
+        // Extract the response details.
+        $simpleXMLElement = simplexml_load_string($httpResponse);
+        
+        if ( !isset($simpleXMLElement->status) || trim($simpleXMLElement->status) === ''  ) {
+            exit( "Invalid HTTP Response for GET request to $url." );
+        }
+
+        return $simpleXMLElement;
+    }
+
+    /**
+     * Get Notification Data
+     *
+     * @param $notificationCode
+     * @return array
+     */
+    public function getNotificationData( $notificationCode )
+    {
+        $email   = urlencode( get_option( 'ab_pagseguro_api_email' ) );
+        $token   = urlencode( get_option( 'ab_pagseguro_api_token' ) );
+
+        $url = 'https://ws' . get_option( 'ab_pagseguro_ec_mode' ) . '.pagseguro.uol.com.br/v3/transactions/notifications/';
+        $url .= $notificationCode . '?email=' . $email . '&token=' . $token;
+
+        // Set the curl parameters.
+        $ch = curl_init();
+        curl_setopt( $ch, CURLOPT_URL, $url );
+        curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
+
+        // Turn off the server and peer verification (TrustManager Concept).
+        curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
+        curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, false );
+
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+
+        // Get response from the server.
+        $httpResponse = curl_exec( $ch );
+
+        if ( ! $httpResponse ) {
+            exit( ' See if transaction is paid at PagSeguro failed: ' . curl_error( $ch ) . '(' . curl_errno( $ch ) . ')' );
+        }
+
+        // Extract the response details.
+        $simpleXMLElement = simplexml_load_string($httpResponse);
+        
+        if ( !isset($simpleXMLElement->status) || trim($simpleXMLElement->status) === ''  ) {
+            exit( "Invalid HTTP Response for GET request to $url." );
+        }
+
+        return $simpleXMLElement;
+    }
+
+    /**
      * Send the Request to PagSeguro
      *
      * @param $nvpStr
@@ -77,7 +161,7 @@ class PagSeguro
     public function sendNvpRequest( $nvpStr )
     {
         $email   = urlencode( get_option( 'ab_pagseguro_api_email' ) );
-        $token   = urlencode( get_option( 'ab_pagseguro_api_token' ) );       
+        $token   = urlencode( get_option( 'ab_pagseguro_api_token' ) );
 
         $url = 'https://ws' . get_option( 'ab_pagseguro_ec_mode' ) . '.pagseguro.uol.com.br/v2/checkout/';
 
